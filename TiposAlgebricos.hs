@@ -1,3 +1,17 @@
+-- exemplos iniciais de aula
+data Temperatura = Fria | Quente deriving (Eq, Show)
+
+type Nome = String
+type Idade = Int
+data Pessoas = Pessoa Nome Idade deriving (Show)
+
+showPerson :: Pessoas -> String
+showPerson (Pessoa n a) = n ++ "--" ++ show a
+
+
+-- união disjunta
+data Figura = Circulo Float | Retangulo Float Float deriving (Show)
+
 -- árvore
 data Tree a = Leaf | Node a (Tree a) (Tree a) deriving (Show, Eq, Ord)
 

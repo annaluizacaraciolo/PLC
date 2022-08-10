@@ -38,6 +38,8 @@ paraMaiuscula (x:xs) = [toUpper x | x <- (x:xs)]
 divisores :: Integer -> [Integer]
 divisores n = [x | x <- [1..n], n `mod` x == 0]
 
+isPrime :: Integer -> Bool
+isPrime x = if length (divisores x) == 2 then True else False
 
 -- questão 3
 menorLista  :: [Int] -> Int 
@@ -69,6 +71,12 @@ takeFinal' n (x:xs) = if length xs == n then xs else takeFinal' n xs
 q8 :: [Int] -> Int 
 q8 [] = 0
 q8 (x:xs) = x+1
+
+-- questão 9
+q9 :: Num a => [a] -> a
+q9 [] = 0
+q9 [a] = a 
+q9 (x:y:xs) = x+y 
 
 -- questão 10
 produto :: [Integer] -> Integer 
