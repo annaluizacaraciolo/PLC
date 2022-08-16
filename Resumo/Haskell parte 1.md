@@ -137,10 +137,6 @@ Precisamos nos atentar a duas coisas ao aprendermos sobre typeclasses:
     
 2. No tópico de ‘tipos algébricos’ iremos criar nossas próprias instâncias de typeclasses, por isso é bom sabermos o comportamento da lista de typeclasses dada acima. **Para ver a implementação dessas typeclasses podemos entrar no ghci e usar o comando `:info` com a typeclasss que queremos (veremos em exemplos daqui a pouco).**
 
-**Tipos Maybe e Either e exception handling**
-
-[https://blog.thomasheartman.com/posts/haskells-maybe-and-either-types](https://blog.thomasheartman.com/posts/haskells-maybe-and-either-types) 
-
 # Higher order
 
 Funções em Haskell aceitam apenas um argumento de entrada e um resultado. Isso, significa que uma função que aparentemente possui mais de um argumento, na verdade, é a aplicação sucessiva da função sobre um argumento de cada vez. 
@@ -148,6 +144,10 @@ Funções em Haskell aceitam apenas um argumento de entrada e um resultado. Isso
 ### Composição de função
 
 O operador de composição de funções é o ponto `.` 
+
+Outro operador de composição de funções é o `$` .
+
+*Verificar quando usar cada um.
 
 ### Curried functions
 
@@ -254,7 +254,16 @@ Para a typeclass Num temos as seguintes operações: {-# MINIMAL (+), (*), abs, 
 - fromInteger
 - (negate | (-)) é a operação de obter o oposto de um número
 
-O exemplo usado anteriormente foi o de Vetor. Agora veremos mais a fundo a implementação de uma estrutura de árvore;
+```haskell
+-- Exemplo de aula de tipo algébrico recursivo
+
+{- Uma expressão inteira é dada como um literal ou uma combinação de duas 
+		expressões usando um operador (Add e Sub) -}
+
+data Expr = Lit Int | Add Expr Expr | Sub Expr Expr
+```
+
+O exemplo usado anteriormente foi o de Vetor e o de Expr. Agora veremos mais a fundo a implementação de uma estrutura de árvore;
 
 ```haskell
 data Tree = Leaf | Node (Tree a) (Tree a) deriving (Show, Eq, Ord)
@@ -297,3 +306,39 @@ leftest (Node a left right) = Just leftest left
 
 -- função para converter árvore em lista 
 ```
+
+**Tipos Maybe e Either e exception handling**
+
+[https://blog.thomasheartman.com/posts/haskells-maybe-and-either-types](https://blog.thomasheartman.com/posts/haskells-maybe-and-either-types) 
+
+**Tipo para união**
+
+```haskell
+ **data Either a b = Left a | Right b deriving (Eq, Show, Read, Ord)**
+```
+
+**Tipo para error handling**
+
+```haskell
+**data Maybe a = Nothing | Just a**
+```
+
+Vamos exemplificar usando o problema da divisão por zero
+
+```haskell
+divide :: Int -> Int -> Maybe Int
+divide x 0 = Nothing
+divide x y = Just div x y
+```
+
+# Listas de exercícios
+
+[Lista de Funções](https://www.notion.so/Lista-de-Fun-es-7a965ffac34640e78811dc151916789e)
+
+[Lista sobre Tuplas](https://www.notion.so/Lista-sobre-Tuplas-dbaebc0c35df4ffcaff488016626457a)
+
+[Lista sobre Listas](https://www.notion.so/Lista-sobre-Listas-e291a6f448cd46549f05200247dca34e)
+
+[Lista de tipos algébricos](https://www.notion.so/Lista-de-tipos-alg-bricos-8e11748076b641f7b832db3f6d9fc88e)
+
+[Lista de classes](https://www.notion.so/Lista-de-classes-d3e0b7f16c8842088d4f49311d59f911)
